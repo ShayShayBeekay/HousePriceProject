@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="utf-8">
+  <title>House Price Index Calculator</title>
+  <link rel="stylesheet" media="screen" href="css/test_styles.css">
+  <link rel="stylesheet" href="css/jquery-ui.css">
+  <!--
+      #API Keyfor sbk@gmail.com 
+      APK_1='xxxxxxxxxxxxxx'
+  -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=xxxxxxxxxxxxxx"></script>
+  <script src="js/my_functions.js"></script>
+  <script src="my_functions.js"></script>
+  <!--Potato Farls-->
+  <script>
+    <?php
+    ini_set('memory_limit', '1024M');
+    // Connecting, selecting database
+    $dbconn = pg_connect("host=hosting.service.url dbname=xxxxxxxx user=xxxxxxxx password=xxxxxxxx")
+        or die('Could not connect: ' . pg_last_error());
+
+    $counties = 'SELECT * FROM house_price_data_db.county_averages';
+    //$query_lnglat='SELECT lng, lat FROM house_price_data_db.main where id>0';
+    $result_counties = pg_query($counties) or die('Query failed: ' . pg_last_error());
+    $county_averages = array();
+    while($r = pg_fetch_assoc($result_counties)) {
+        $county_averages[] = $r;
+    }
+    echo("var county_avgs= " . json_encode(array_values($county_averages)).";");
+
+    pg_free_result($result);
+    pg_close($dbconn);
+    ?>
+    console.log(county_averages);
+  </script>
+  
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $(".part1").click(function(){
+        $("#btn1click").show();
+        $("#btn2click").hide();
+        //$("#btn3click").hide();
+      });
+      $(".part2").click(function(){
+        $("#btn1click").hide();
+        $("#btn2click").show();
+        //$("#btn3click").hide();
+      });
+      $(".part3").click(function(){
+        $("#btn1click").hide();
+        $("#btn2click").hide();
+        $("#btn3click").show();
+      });
+      $(".compare_button").click(function(){
+        google.load('visualization', '1.0', {'packages':['corechart']});
+        google.setOnLoadCallback(county_avg_chart);
+        chart = new google.visualization.LineChart(document.getElementById("chart_div"));
+        
+        var county_1 = document.getElementById("dd1").value;
+        var county_2 = document.getElementById("dd2").value;
+
+
+        var i;
+        for(i = 0; i < county_avgs.length; i += 1){
+          if(county_avgs.county[i]==county_1) {
+                avg_2010_1=county_avgs.average_2010[i];
+                avg_2011_1=county_avgs.average_2011[i];
+                avg_2012_1=county_avgs.average_2012[i];
+                avg_2013_1=county_avgs.average_2013[i];
+                avg_2014_1=county_avgs.average_2014[i];
+          }
+          if(county_avgs.county[i]==county_2) {
+                avg_2010_2=county_avgs.average_2010[i];
+                avg_2011_2=county_avgs.average_2011[i];
+                avg_2012_2=county_avgs.average_2012[i];
+                avg_2013_2=county_avgs.average_2013[i];
+                avg_2014_2=county_avgs.average_2014[i];
+          }
+          if(county_avgs.county[i]=='National') {
+                avg_2010_3=county_avgs.average_2010[i];
+                avg_2011_3=county_avgs.average_2011[i];
+                avg_2012_3=county_avgs.average_2012[i];
+                avg_2013_3=county_avgs.average_2013[i];
+                avg_2014_3=county_avgs.average_2014[i];
+          }
+        } 
+        var data = google.visualization.arrayToDataTable([
+              ['Year', county_1, county_2, 'National'],
+              ['2010', avg_2010_1, avg_2010_2, avg_2010_3],
+              ['2011', avg_2011_1, avg_2011_2, avg_2011_3],
+              ['2012', avg_2012_1 , avg_2012_2,avg_2012_3],
+              ['2013', avg_2013_1 , avg_2013_2,avg_2013_3],
+              ['2014', avg_2014_1 , avg_2014_2,avg_2014_3]
+        ]);
+            // Set chart options
+        //var title = 'House Price Averages by County:'.concat(county_1.concat(' vs '.concat(county_2)));
+        var options = {'title':'House Price Averages by County:',};
+            // Instantiate and draw our chart, passing in some options.
+
+        chart.draw(data, options);
+
+    });
+  </script>
+  <script>
+    $(function() {
+      $( "#price_slider" ).slider({
+        range: true,
+        min: 0,
+        max: 500000,
+        values: [ 150000, 350000 ],
+        slide: function( event, ui ) {
+          $( "#amount" ).val( "€" + ui.values[ 0 ] + " - €" + ui.values[ 1 ] );
+        }
+      });
+      $( "#amount" ).val( "€" + $( "#price_slider" ).slider( "values", 0 ) +
+        " - €" + $( "#price_slider" ).slider( "values", 1 ) );
+    });
+    $(function() {
+      $( "#timeframe_slider" ).slider({
+        range: true,
+        min: 2010,
+        max: 2015,
+        values: [ 2012, 2013 ],
+        slide: function( event, ui ) {
+          $( "#timerange" ).val( "" + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+        }
+      });
+      $( "#timerange" ).val( "" + $( "#timeframe_slider" ).slider( "values", 0 ) +
+        " - " + $( "#timeframe_slider" ).slider( "values", 1 ) );
+    });
+  </script>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+    
+  }
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="S. Brennan-Kelly">
+  <meta name="robots" content="all">
+</head>
+
+<body>
+        <div id="drop_downs_div">
+          <!--
+          This section is for comparing 2 towns/counties based on "average"/unknown_metric
+          Will allow user to select to compare by town or county
+          Need to put in buttons for town and county.
+          Will use tcd table from db to populate the drop-downs based on whether town or county selected.
+          Will display information on chart based on selections compared to relative county/national average
+          -->
+          <div id="drop_downs">
+            <select id="dd1">
+              <!--<option value="default">--Please Select--</option>-->
+              <option value="Carlow">Carlow</option>
+              <option value="Cavan">Cavan</option>
+              <option value="Clare">Clare</option>
+              <option value="Cork">Cork</option>
+              <option value="Donegal">Donegal</option>
+              <option value="Dublin">Dublin</option>
+              <option value="Galway">Galway</option>
+              <option value="Kerry">Kerry</option>
+              <option value="Kildare">Kildare</option>
+              <option value="Kilkenny">Kilkenny</option>
+              <option value="Laois">Laois</option>
+              <option value="Leitrim">Leitrim</option>
+              <option value="Limerick">Limerick</option>
+              <option value="Longford">Longford</option>
+              <option value="Louth">Louth</option>
+              <option value="Mayo">Mayo</option>
+              <option value="Meath">Meath</option>
+              <option value="Monaghan">Monaghan</option>
+              <option value="Offaly">Offaly</option>
+              <option value="Roscommon">Roscommon</option>
+              <option value="Sligo">Sligo</option>
+              <option value="Tipperary">Tipperary</option>
+              <option value="Waterford">Waterford</option>
+              <option value="Westmeath">Westmeath</option>
+              <option value="Wexford">Wexford</option>
+              <option value="Wicklow">Wicklow</option>
+            </select>
+            </br>
+            <select id="dd2">
+              <!--<option value="default">--Please Select--</option>-->
+              <option value="Carlow">Carlow</option>
+              <option value="Cavan">Cavan</option>
+              <option value="Clare">Clare</option>
+              <option value="Cork">Cork</option>
+              <option value="Donegal">Donegal</option>
+              <option value="Dublin">Dublin</option>
+              <option value="Galway">Galway</option>
+              <option value="Kerry">Kerry</option>
+              <option value="Kildare">Kildare</option>
+              <option value="Kilkenny">Kilkenny</option>
+              <option value="Laois">Laois</option>
+              <option value="Leitrim">Leitrim</option>
+              <option value="Limerick">Limerick</option>
+              <option value="Longford">Longford</option>
+              <option value="Louth">Louth</option>
+              <option value="Mayo">Mayo</option>
+              <option value="Meath">Meath</option>
+              <option value="Monaghan">Monaghan</option>
+              <option value="Offaly">Offaly</option>
+              <option value="Roscommon">Roscommon</option>
+              <option value="Sligo">Sligo</option>
+              <option value="Tipperary">Tipperary</option>
+              <option value="Waterford">Waterford</option>
+              <option value="Westmeath">Westmeath</option>
+              <option value="Wexford">Wexford</option>
+              <option value="Wicklow">Wicklow</option>
+            </select>  
+              <input type="button" onclick="county_avg_chart();" id="compare_button" value="Compare">
+          </div>
+        </div>
+        <!--Div that will hold the line chart-->
+        <div id="chart_div">
+        </div>
+</body>

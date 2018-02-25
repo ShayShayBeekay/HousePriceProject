@@ -1,0 +1,272 @@
+/*color: #325050;*/
+/*
+	Colors:
+		#999 - Grey
+		#fff - White
+		#205c73 - Navy (Header and Footer)
+		#fffff0 - Cream (Body)
+		#f6931f - Orange
+*/
+#test_php{
+	font-size: 40px;
+	color: #333;
+	z-index: 99;
+}
+#panel {
+        position: absolute;
+        top: 0px;
+        left: -78%;
+        /*margin-left: -180px;*/
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        -webkit-box-shadow: inset 0px .5px 0px #999, 0px .5px 0px 0px #999, 0px .5px .25px #999;
+		-moz-box-shadow: inset 0px .5px 0px #999, 0px .5px 0px 0px #999, 0px .5px .25px #999;
+		box-shadow: inset 0px .5px 0px #999, 0px .5px 0px 0px #999, 0px .5px .25px #999;
+		/*give the corners a small curve*/
+		-moz-border-radius: 3px;
+		-webkit-border-radius: 3px;
+		border-radius: 3px;
+      }
+/*CSS to draw Google Maps canvas onto website*/
+#map_canvas {
+    display: block;
+    height: 100%; 
+	width: 100%; 
+	position:absolute; 
+	top: 0; 
+	left: 0; 
+	z-index: 70;
+      }
+      
+/*CSS to draw Google Chart canvas onto website*/
+#over_map { 
+	position: absolute; 
+	top: 26px; 
+	left: 50.5%; 
+	width:49%;
+	height:70%;
+	z-index: 99; 
+	float: right;
+	/*use box-shadow to give the button some depth - see cssdemos.tupence.co.uk/box-shadow.htm#demo7 for more info on this technique*/
+	-webkit-box-shadow: inset 0px 1px 0px #999, 0px 3px 0px 0px #999, 0px 6px 3px #999;
+	-moz-box-shadow: inset 0px 1px 0px #999, 0px 3px 0px 0px #999, 0px 6px 3px #999;
+	box-shadow: inset 0px 1px 0px #999, 0px 3px 0px 0px #999, 0px 6px 3px #999;
+	/*give the corners a small curve*/
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	background: #ffffff;
+}
+#chart_div{
+ 	width:99.5%;
+    height:60%;
+    margin-left: 0% !important;
+    margin-left: 0% !important;
+    margin-top:2%;
+    background: #ffffff;
+        /* margin: -5.5% 10% 3.25% 10%;
+        */
+    font-size: 75% !important;
+    float: center !important;
+    clear: both;
+ }
+/*Style information for the header*/
+header {
+    height: 75px;
+    color: #fff !important;
+    clear: both;
+	/*color: #fff !important;*/
+	background: #205c73;
+	text-align: center;
+	padding-top: 2% !important;
+	padding-bottom: 2% !important;
+	width: 100%;
+	margin-bottom: 2% !important;
+  }
+  header p{
+  	color: #999 !important;
+  }
+/*End of header styling*/
+
+/*Style information for the footer*/
+footer {
+  clear: both;
+  /*color: #fff !important;*/
+  background: #205c73;
+  text-align: center;
+  margin-top: 2% !important;
+  padding-top: 2% !important;
+  padding-bottom: 2% !important;
+  width: 100%;
+}
+footer a{
+	font-style: italic;
+	color: #fff !important;
+}
+footer p{
+	color: #999 !important;
+}
+/*End of footer styling*/
+
+/*Style information for the html, body*/
+body {
+  	/*
+  	padding: .25%;
+  	margin: .25%;
+  	*/
+  	margin:0 !important;
+	font-family: "Arial" !important;
+}
+
+body {
+	color: #666;
+	background: #fffff0;
+	font-size: 90%;
+	font-family: "Arial" !important;
+}
+
+h1{
+	color: #fff;
+	font-family: "Arial" !important;
+}
+
+p{
+	color: #666;
+	font-family: "Arial" !important;
+	font-size: 12px;
+}
+/*http://cssdemos.tupence.co.uk/button-styling.htm
+For buttons of town/county on main page*/
+#drop_downs_div{
+	margin: 1% !important;
+	margin-top: 1.5% !important;
+	width:500px;
+	font-family: "Arial" !important;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px; 
+	float:left !important;
+}
+#in_tab{
+	margin: 4% !important;
+	margin-right: 6% !important;
+	width:500px;
+	font-family: "Arial" !important;
+}
+#drop_downs_county{
+	width:300px;
+	margin-top: -7.25%;
+	margin-left: 62%;
+	margin-bottom: 1%;
+}
+#drop_downs_town{
+	width:300px;
+	margin-top: .5%;
+	margin-left: 62%;
+}
+#dd1_c,#dd1_t{
+	width:110px;
+	padding: 4px 8px 6px;
+	float:left;
+
+}
+#dd2_c{
+	width:110px;
+	padding: 4px 8px 6px;
+	margin-top: -16px;
+	float:left;
+	margin-left: 1%;
+}
+#dd2_t{
+	width:110px;
+	padding: 4px 8px 6px;
+	margin-top: 0px;
+	float:left;
+	margin-left: 1%;
+}
+#compare_button_county{
+	width:70px;
+	margin-top: -5.25%;
+	margin-left: 2%;
+}
+#compare_button_town{
+	width:70px;
+	margin-top: -6%;
+	margin-left: 76%;
+}
+#buttons{
+	margin-left: 1% !important;
+	margin-right: 1% !important;
+	margin-bottom: 1% !important;
+	margin-top: 1% !important;
+	float:center !important;
+}
+/***FIRST STYLE THE BUTTON***/
+input#bigbutton {
+	width:49.5%;
+	background: #3e9cbf; /*the colour of the button*/
+	padding: 6px 12px 8px; /*apply some padding inside the button*/
+	border:1px solid #3e9cbf; /*required or the default border for the browser will appear*/
+	cursor:pointer; /*forces the cursor to change to a hand when the button is hovered*/
+	/*style the text*/
+	font-size:1.25em;
+	text-align: center;
+	font-family: "Arial" !important; 
+	letter-spacing:.1em;
+	text-shadow: 0 -1px 0px rgba(0, 0, 0, 0.3); /*give the text a shadow - doesn't appear in Opera 12.02 or earlier*/
+	color: #fff;
+	/*use box-shadow to give the button some depth - see cssdemos.tupence.co.uk/box-shadow.htm#demo7 for more info on this technique*/
+	-webkit-box-shadow: inset 0px 1px 0px #3e9cbf, 0px 3px 0px 0px #205c73, 0px 6px 3px #999;
+	-moz-box-shadow: inset 0px 1px 0px #3e9cbf, 0px 3px 0px 0px #205c73, 0px 6px 3px #999;
+	box-shadow: inset 0px 1px 0px #3e9cbf, 0px 3px 0px 0px #205c73, 0px 6px 3px #999;
+	/*give the corners a small curve*/
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+/***SET THE BUTTON'S HOVER AND FOCUS STATES***/
+input#bigbutton:hover, input#bigbutton:focus {
+	color:#dfe7ea;
+	/*reduce the size of the shadow to give a pushed effect*/
+	-webkit-box-shadow: inset 0px 1px 0px #3e9cbf, 0px 2px 0px 0px #205c73, 0px 2px 3px #999;
+	-moz-box-shadow: inset 0px 1px 0px #3e9cbf, 0px 2px 0px 0px #205c73, 0px 2px 3px #999;
+	box-shadow: inset 0px 1px 0px #3e9cbf, 0px 2px 0px 0px #205c73, 0px 2px 3px #999;
+}
+
+input#tc_buttons {
+	width:29.9%;
+	height:8.5%;
+	background: #3e9cbf; /*the colour of the button*/
+	padding: 4px 10px 6px; /*apply some padding inside the button*/
+	border:1px solid #3e9cbf; /*required or the default border for the browser will appear*/
+	cursor:pointer; /*forces the cursor to change to a hand when the button is hovered*/
+	/*style the text*/
+	font-size:1em;
+	text-align: center;
+	font-family: "Arial" !important; 
+	letter-spacing:.1em;
+	text-shadow: 0 -1px 0px rgba(0, 0, 0, 0.3); /*give the text a shadow - doesn't appear in Opera 12.02 or earlier*/
+	color: #fff;
+	/*use box-shadow to give the button some depth - see cssdemos.tupence.co.uk/box-shadow.htm#demo7 for more info on this technique*/
+	-webkit-box-shadow: inset 0px 1px 0px #3e9cbf, 0px 3px 0px 0px #205c73, 0px 6px 3px #999;
+	-moz-box-shadow: inset 0px 1px 0px #3e9cbf, 0px 3px 0px 0px #205c73, 0px 6px 3px #999;
+	box-shadow: inset 0px 1px 0px #3e9cbf, 0px 3px 0px 0px #205c73, 0px 6px 3px #999;
+	/*give the corners a small curve*/
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+/***SET THE BUTTON'S HOVER AND FOCUS STATES***/
+input#tc_buttons:hover, input#tc_buttons:focus {
+	color:#dfe7ea;
+	/*reduce the size of the shadow to give a pushed effect*/
+	-webkit-box-shadow: inset 0px 1px 0px #3e9cbf, 0px 2px 0px 0px #205c73, 0px 2px 3px #999;
+	-moz-box-shadow: inset 0px 1px 0px #3e9cbf, 0px 2px 0px 0px #205c73, 0px 2px 3px #999;
+	box-shadow: inset 0px 1px 0px #3e9cbf, 0px 2px 0px 0px #205c73, 0px 2px 3px #999;
+}
+
+a{
+	color: #333;
+}
